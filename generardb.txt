@@ -1,0 +1,33 @@
+-- Crear la base de datos TareaCrud
+CREATE DATABASE IF NOT EXISTS TareaCrud;
+
+-- Seleccionar la base de datos TareaCrud
+USE TareaCrud;
+
+-- Crear tabla Usuarios
+CREATE TABLE IF NOT EXISTS Usuarios (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL
+);
+
+-- Crear tabla Publicaciones
+CREATE TABLE IF NOT EXISTS Publicaciones (
+    id INT PRIMARY KEY,
+    título VARCHAR(255) NOT NULL,
+    contenido TEXT NOT NULL,
+    fecha_creacion TIMESTAMP NOT NULL,
+    usuario_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id)
+);
+
+-- Crear tabla Comentarios
+CREATE TABLE IF NOT EXISTS Comentarios (
+    id INT PRIMARY KEY,
+    contenido TEXT NOT NULL,
+    fecha_creacion TIMESTAMP NOT NULL,
+    publicacion_id INT,
+    usuario_id INT,
+    FOREIGN KEY (publicacion_id) REFERENCES Publicaciones(id),
+    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id)
+);
